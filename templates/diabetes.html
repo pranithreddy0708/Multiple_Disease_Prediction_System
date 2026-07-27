@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diabetes Prediction — DiseasePred</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="/" class="logo"><span class="logo-icon">⬡</span> DiseasePred</a>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/symptom-checker">Symptom Checker</a>
+            <a href="/diabetes" class="active">Diabetes</a>
+            <a href="/heart">Heart</a>
+            <a href="/parkinsons">Parkinson's</a>
+            <a href="/lung">Lung Cancer</a>
+            <a href="/kidney">Kidney Disease</a>
+            <a href="/history">History</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <div class="page-header page-header-diabetes">
+        <div class="page-header-content">
+            <div class="page-icon">🩸</div>
+            <div>
+                <h1>Diabetes Prediction</h1>
+                <p>SVM Model · 8 Clinical Features · ~77% Accuracy</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-container">
+
+
+
+        <h2>Enter Clinical Parameters</h2>
+        <p class="subtitle">Fill in your medical values below.</p>
+
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="patient_name">Patient Name</label>
+                <input type="text" id="patient_name" placeholder="Enter patient name">
+
+            </div>
+            <div class="form-group"><label>Pregnancies <span class="hint">Number of times</span></label><input type="number" id="pregnancies" value="1" min="0" max="20" /></div>
+            <div class="form-group"><label>Glucose Level <span class="hint">mg/dL</span></label><input type="number" id="glucose" value="120" min="0" max="200" /></div>
+            <div class="form-group"><label>Blood Pressure <span class="hint">mm Hg</span></label><input type="number" id="blood_pressure" value="70" min="0" max="130" /></div>
+            <div class="form-group"><label>Skin Thickness <span class="hint">mm</span></label><input type="number" id="skin_thickness" value="20" min="0" max="100" /></div>
+            <div class="form-group"><label>Insulin Level <span class="hint">μU/ml</span></label><input type="number" id="insulin" value="80" min="0" max="900" /></div>
+            <div class="form-group"><label>BMI <span class="hint">kg/m²</span></label><input type="number" id="bmi" value="25.0" step="0.1" min="0" max="70" /></div>
+            <div class="form-group"><label>Diabetes Pedigree Function <span class="hint">Genetic factor</span></label><input type="number" id="dpf" value="0.5" step="0.001" min="0" max="3" /></div>
+            <div class="form-group"><label>Age <span class="hint">Years</span></label><input type="number" id="age" value="30" min="1" max="120" /></div>
+        </div>
+
+        <button class="btn-predict" onclick="predict('diabetes')">
+    <span class="btn-text">🔍 Predict Diabetes</span>
+    <span class="btn-loader" style="display:none">Analyzing ⏳</span>
+  </button>
+
+        <div class="risk-meter-container" id="risk-meter" style="display:none">
+            <h4>Risk Confidence Meter</h4>
+            <div class="risk-meter">
+                <div class="risk-fill" id="risk-fill"><span class="risk-label" id="risk-label"></span></div>
+            </div>
+            <div class="risk-scale"><span>Low Risk</span><span>Moderate</span><span>High Risk</span></div>
+        </div>
+
+        <div class="result-box" id="result" style="display:none"></div>
+
+        <div class="health-tips" id="health-tips" style="display:none">
+            <h4>💡 Personalized Health Tips</h4>
+            <ul id="tips-list"></ul>
+        </div>
+
+        <div class="report-actions" id="report-actions" style="display:none">
+            <button class="btn-secondary" onclick="printReport('diabetes')">🖨️ Print Report</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

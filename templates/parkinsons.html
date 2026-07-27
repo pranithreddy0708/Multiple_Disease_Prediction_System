@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parkinson's Prediction — DiseasePred</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="/" class="logo"><span class="logo-icon">⬡</span> DiseasePred</a>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/symptom-checker">Symptom Checker</a>
+            <a href="/diabetes">Diabetes</a>
+            <a href="/heart">Heart</a>
+            <a href="/parkinsons" class="active">Parkinson's</a>
+            <a href="/lung">Lung Cancer</a>
+            <a href="/kidney">Kidney Disease</a>
+            <a href="/history">History</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <div class="page-header page-header-parkinsons">
+        <div class="page-header-content">
+            <div class="page-icon">🧠</div>
+            <div>
+                <h1>Parkinson's Disease Prediction</h1>
+                <p>SVM Model · 22 Voice Biomarkers · ~90% Accuracy</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <div class="info-banner">ℹ️ These 22 values come from voice recordings. Each measures a vocal characteristic clinically associated with Parkinson's disease.</div>
+
+        <h2>Enter Voice Measurement Features</h2>
+        <p class="subtitle">All 22 acoustic features are required for accurate prediction.</p>
+
+        <div class="feature-section-title">📊 Fundamental Frequency</div>
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="patient_name">Patient Name</label>
+                <input type="text" id="patient_name" placeholder="Enter patient name">
+            </div>
+            <div class="form-group"><label>MDVP:Fo(Hz) <span class="hint">Average frequency</span></label><input type="number" id="fo" value="150" step="0.001" /></div>
+            <div class="form-group"><label>MDVP:Fhi(Hz) <span class="hint">Maximum frequency</span></label><input type="number" id="fhi" value="200" step="0.001" /></div>
+            <div class="form-group"><label>MDVP:Flo(Hz) <span class="hint">Minimum frequency</span></label><input type="number" id="flo" value="100" step="0.001" /></div>
+        </div>
+
+        <div class="feature-section-title">📈 Jitter Measures</div>
+        <div class="form-grid">
+            <div class="form-group"><label>MDVP:Jitter(%)</label><input type="number" id="jitter_percent" value="0.005" step="0.00001" /></div>
+            <div class="form-group"><label>MDVP:Jitter(Abs)</label><input type="number" id="jitter_abs" value="0.00004" step="0.000001" /></div>
+            <div class="form-group"><label>MDVP:RAP</label><input type="number" id="rap" value="0.003" step="0.00001" /></div>
+            <div class="form-group"><label>MDVP:PPQ</label><input type="number" id="ppq" value="0.003" step="0.00001" /></div>
+            <div class="form-group"><label>Jitter:DDP</label><input type="number" id="ddp" value="0.009" step="0.00001" /></div>
+        </div>
+
+        <div class="feature-section-title">📉 Shimmer Measures</div>
+        <div class="form-grid">
+            <div class="form-group"><label>MDVP:Shimmer</label><input type="number" id="shimmer" value="0.03" step="0.00001" /></div>
+            <div class="form-group"><label>MDVP:Shimmer(dB)</label><input type="number" id="shimmer_db" value="0.3" step="0.001" /></div>
+            <div class="form-group"><label>Shimmer:APQ3</label><input type="number" id="apq3" value="0.015" step="0.00001" /></div>
+            <div class="form-group"><label>Shimmer:APQ5</label><input type="number" id="apq5" value="0.02" step="0.00001" /></div>
+            <div class="form-group"><label>MDVP:APQ</label><input type="number" id="apq" value="0.025" step="0.00001" /></div>
+            <div class="form-group"><label>Shimmer:DDA</label><input type="number" id="dda" value="0.045" step="0.00001" /></div>
+        </div>
+
+        <div class="feature-section-title">🔇 Noise Ratios</div>
+        <div class="form-grid">
+            <div class="form-group"><label>NHR <span class="hint">Noise-to-harmonics</span></label><input type="number" id="nhr" value="0.025" step="0.00001" /></div>
+            <div class="form-group"><label>HNR <span class="hint">Harmonics-to-noise</span></label><input type="number" id="hnr" value="22.0" step="0.001" /></div>
+        </div>
+
+        <div class="feature-section-title">🌀 Nonlinear Dynamics</div>
+        <div class="form-grid">
+            <div class="form-group"><label>RPDE</label><input type="number" id="rpde" value="0.5" step="0.00001" /></div>
+            <div class="form-group"><label>DFA</label><input type="number" id="dfa" value="0.7" step="0.00001" /></div>
+            <div class="form-group"><label>spread1</label><input type="number" id="spread1" value="-5.0" step="0.00001" /></div>
+            <div class="form-group"><label>spread2</label><input type="number" id="spread2" value="0.3" step="0.00001" /></div>
+            <div class="form-group"><label>D2</label><input type="number" id="d2" value="2.5" step="0.00001" /></div>
+            <div class="form-group"><label>PPE</label><input type="number" id="ppe" value="0.2" step="0.00001" /></div>
+        </div>
+
+        <button class="btn-predict" onclick="predict('parkinsons')">
+    <span class="btn-text">🔍 Predict Parkinson's</span>
+    <span class="btn-loader" style="display:none">Analyzing ⏳</span>
+  </button>
+
+        <div class="risk-meter-container" id="risk-meter" style="display:none">
+            <h4>Risk Confidence Meter</h4>
+            <div class="risk-meter">
+                <div class="risk-fill" id="risk-fill"><span class="risk-label" id="risk-label"></span></div>
+            </div>
+            <div class="risk-scale"><span>Low Risk</span><span>Moderate</span><span>High Risk</span></div>
+        </div>
+
+        <div class="result-box" id="result" style="display:none"></div>
+
+        <div class="health-tips" id="health-tips" style="display:none">
+            <h4>💡 Personalized Health Tips</h4>
+            <ul id="tips-list"></ul>
+        </div>
+
+        <div class="report-actions" id="report-actions" style="display:none">
+            <button class="btn-secondary" onclick="printReport('parkinsons')">🖨️ Print Report</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

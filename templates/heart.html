@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Heart Disease Prediction — DiseasePred</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="/" class="logo"><span class="logo-icon">⬡</span> DiseasePred</a>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/symptom-checker">Symptom Checker</a>
+            <a href="/diabetes">Diabetes</a>
+            <a href="/heart" class="active">Heart</a>
+            <a href="/parkinsons">Parkinson's</a>
+            <a href="/lung">Lung Cancer</a>
+            <a href="/kidney">Kidney Disease</a>
+            <a href="/history">History</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <div class="page-header page-header-heart">
+        <div class="page-header-content">
+            <div class="page-icon">❤️</div>
+            <div>
+                <h1>Heart Disease Prediction</h1>
+                <p>Random Forest Model · 13 Clinical Features · ~85% Accuracy</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <h2>Enter Clinical Parameters</h2>
+        <p class="subtitle">Provide your cardiovascular measurements for an accurate risk assessment.</p>
+
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="patient_name">Patient Name</label>
+                <input type="text" id="patient_name" placeholder="Enter patient name">
+            </div>
+            <div class="form-group"><label>Age <span class="hint">Years</span></label><input type="number" id="age" value="50" /></div>
+            <div class="form-group"><label>Sex</label><select id="sex"><option value="1">Male</option><option value="0">Female</option></select></div>
+            <div class="form-group"><label>Chest Pain Type</label>
+                <select id="cp">
+        <option value="0">0 — Typical Angina</option>
+        <option value="1">1 — Atypical Angina</option>
+        <option value="2">2 — Non-anginal Pain</option>
+        <option value="3">3 — Asymptomatic</option>
+      </select>
+            </div>
+            <div class="form-group"><label>Resting BP <span class="hint">mm Hg</span></label><input type="number" id="trestbps" value="120" /></div>
+            <div class="form-group"><label>Cholesterol <span class="hint">mg/dl</span></label><input type="number" id="chol" value="200" /></div>
+            <div class="form-group"><label>Fasting Blood Sugar &gt;120</label><select id="fbs"><option value="0">No</option><option value="1">Yes</option></select></div>
+            <div class="form-group"><label>Resting ECG</label>
+                <select id="restecg">
+        <option value="0">0 — Normal</option>
+        <option value="1">1 — ST-T Abnormality</option>
+        <option value="2">2 — LV Hypertrophy</option>
+      </select>
+            </div>
+            <div class="form-group"><label>Max Heart Rate <span class="hint">bpm</span></label><input type="number" id="thalach" value="150" /></div>
+            <div class="form-group"><label>Exercise Induced Angina</label><select id="exang"><option value="0">No</option><option value="1">Yes</option></select></div>
+            <div class="form-group"><label>ST Depression <span class="hint">oldpeak</span></label><input type="number" id="oldpeak" value="1.0" step="0.1" /></div>
+            <div class="form-group"><label>Slope of ST Segment</label>
+                <select id="slope">
+        <option value="0">0 — Upsloping</option>
+        <option value="1">1 — Flat</option>
+        <option value="2">2 — Downsloping</option>
+      </select>
+            </div>
+            <div class="form-group"><label>Major Vessels <span class="hint">0–4</span></label><input type="number" id="ca" value="0" min="0" max="4" /></div>
+            <div class="form-group"><label>Thal</label>
+                <select id="thal">
+        <option value="0">0 — Normal</option>
+        <option value="1">1 — Fixed Defect</option>
+        <option value="2">2 — Reversable Defect</option>
+      </select>
+            </div>
+        </div>
+
+        <button class="btn-predict" onclick="predict('heart')">
+    <span class="btn-text">🔍 Predict Heart Disease</span>
+    <span class="btn-loader" style="display:none">Analyzing ⏳</span>
+  </button>
+
+        <div class="risk-meter-container" id="risk-meter" style="display:none">
+            <h4>Risk Confidence Meter</h4>
+            <div class="risk-meter">
+                <div class="risk-fill" id="risk-fill"><span class="risk-label" id="risk-label"></span></div>
+            </div>
+            <div class="risk-scale"><span>Low Risk</span><span>Moderate</span><span>High Risk</span></div>
+        </div>
+
+        <div class="result-box" id="result" style="display:none"></div>
+
+        <div class="health-tips" id="health-tips" style="display:none">
+            <h4>💡 Personalized Health Tips</h4>
+            <ul id="tips-list"></ul>
+        </div>
+
+        <div class="report-actions" id="report-actions" style="display:none">
+            <button class="btn-secondary" onclick="printReport('heart')">🖨️ Print Report</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

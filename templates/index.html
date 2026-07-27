@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DiseasePred — ML Disease Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <style>
+        /* Kidney Card */
+        
+        .card-kidney .card-stripe {
+            background: linear-gradient(90deg, #8e44ad, #5e2ca5);
+        }
+        
+        .card-kidney .acc-bar {
+            background: #8e44ad;
+        }
+        
+        .card-kidney .card-icon {
+            font-size: 34px;
+        }
+        /* Lung Card */
+        
+        .card-lung .card-stripe {
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+        }
+        
+        .card-lung .acc-bar {
+            background: #27ae60;
+        }
+        
+        .card-lung .card-icon {
+            font-size: 34px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="/" class="logo"><span class="logo-icon">⬡</span> DiseasePred</a>
+        <nav>
+            <a href="/" class="active">Home</a>
+            <a href="/symptom-checker">Symptom Checker</a>
+            <a href="/diabetes">Diabetes</a>
+            <a href="/heart">Heart</a>
+            <a href="/parkinsons">Parkinson's</a>
+            <a href="/lung">Lung Cancer</a>
+            <a href="/kidney">Kidney Disease</a>
+            <a href="/history">History</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">🔬 Powered by Machine Learning</div>
+            <h1>Predict Disease<br><span class="hero-highlight">Early & Accurately</span></h1>
+            <p>Enter your clinical parameters and get instant AI-powered health risk assessments for Diabetes, Heart Disease, and Parkinson's.</p>
+            <div class="hero-btns">
+                <a href="/symptom-checker" class="btn-white">Check Symptoms First →</a>
+                <a href="#features" class="btn-outline-white">See All Modules</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="pulse-ring"></div>
+            <div class="pulse-ring d1"></div>
+            <div class="pulse-ring d2"></div>
+            <div class="hero-icon-center">🫀</div>
+        </div>
+    </section>
+
+    <section class="stats-bar">
+        <div class="stat"><span class="stat-num" data-target="77">0</span><span>%</span>
+            <p>Diabetes Accuracy</p>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num" data-target="85">0</span><span>%</span>
+            <p>Heart Accuracy</p>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num" data-target="90">0</span><span>%</span>
+            <p>Parkinson's Accuracy</p>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num" data-target="3">0</span><span>+</span>
+            <p>Diseases Covered</p>
+        </div>
+    </section>
+
+    <section id="features" class="cards-section">
+        <div class="section-label">Disease Modules</div>
+        <h2 class="section-title">Choose a Prediction Module</h2>
+        <div class="cards">
+
+            <a href="/symptom-checker" class="card" style="border-top:5px solid #43a047;">
+                <div class="card-icon">🔔</div>
+                <div class="card-tag">New Feature</div>
+                <h3>Symptom Checker</h3>
+                <p>Not sure where to start? Check your symptoms and get guided to the right prediction module.</p>
+                <div class="card-accuracy">
+                    <div class="acc-bar" style="--w:100%;background:linear-gradient(90deg,#43a047,#81c784)"></div>
+                    <span>Guided Assessment</span>
+                </div>
+                <div class="card-arrow">→</div>
+            </a>
+
+            <a href="/diabetes" class="card card-diabetes">
+                <div class="card-stripe"></div>
+                <div class="card-icon">🩸</div>
+                <div class="card-tag">SVM · 8 Features</div>
+                <h3>Diabetes</h3>
+                <p>Analyzes glucose, BMI, insulin, blood pressure and more using the Pima Indians dataset.</p>
+                <div class="card-accuracy">
+                    <div class="acc-bar" style="--w:77%"></div><span>77% Accuracy</span></div>
+                <div class="card-arrow">→</div>
+            </a>
+
+            <a href="/heart" class="card card-heart">
+                <div class="card-stripe"></div>
+                <div class="card-icon">❤️</div>
+                <div class="card-tag">Random Forest · 13 Features</div>
+                <h3>Heart Disease</h3>
+                <p>Evaluates cholesterol, ECG readings, chest pain type, and other cardiovascular markers.</p>
+                <div class="card-accuracy">
+                    <div class="acc-bar" style="--w:85%"></div><span>85% Accuracy</span></div>
+                <div class="card-arrow">→</div>
+            </a>
+
+            <a href="/parkinsons" class="card card-parkinsons">
+                <div class="card-stripe"></div>
+                <div class="card-icon">🧠</div>
+                <div class="card-tag">SVM · 22 Voice Features</div>
+                <h3>Parkinson's</h3>
+                <p>Detects early-stage Parkinson's through 22 vocal biomarkers including jitter, shimmer, and HNR.</p>
+                <div class="card-accuracy">
+                    <div class="acc-bar" style="--w:90%"></div><span>90% Accuracy</span></div>
+                <div class="card-arrow">→</div>
+            </a>
+            <a href="/lung" class="card card-lung">
+                <div class="card-stripe"></div>
+
+                <div class="card-icon">🫁</div>
+
+                <div class="card-tag">ML · 15 Features</div>
+
+                <h3>Lung Cancer</h3>
+
+                <p>Predicts lung cancer risk using respiratory symptoms, smoking history and related health indicators.</p>
+
+                <div class="card-accuracy">
+                    <div class="acc-bar" style="--w:88%"></div>
+                    <span>88% Accuracy</span>
+                </div>
+
+                <div class="card-arrow">→</div>
+            </a>
+            <a href="/kidney" class="card card-kidney">
+                <div class="card-stripe"></div>
+
+                <div class="card-icon">🩺</div>
+
+                <div class="card-tag">ML · 12 Features</div>
+
+                <h3>Kidney Disease</h3>
+
+                <p>Analyzes blood test parameters like creatinine, urea, sodium and potassium to detect kidney disease risk.</p>
+
+                <div class="card-accuracy">
+                    <div class="acc-bar" style="--w:90%"></div>
+                    <span>90% Accuracy</span>
+                </div>
+
+                <div class="card-arrow">→</div>
+            </a>
+
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="section-label">Process</div>
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">01</div>
+                <h4>Check Symptoms</h4>
+                <p>Use the Symptom Checker to identify which disease to investigate.</p>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step">
+                <div class="step-num">02</div>
+                <h4>Enter Parameters</h4>
+                <p>Fill in your clinical values in the prediction form.</p>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step">
+                <div class="step-num">03</div>
+                <h4>ML Analysis</h4>
+                <p>Our trained model processes your data instantly.</p>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step">
+                <div class="step-num">04</div>
+                <h4>Get Results</h4>
+                <p>Receive prediction, confidence score, and health tips.</p>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step">
+                <div class="step-num">05</div>
+                <h4>Print Report</h4>
+                <p>Print a detailed health report for your records.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>⚠️ <strong>Disclaimer:</strong> This tool is for educational purposes only. Not a substitute for professional medical advice.</p>
+        <p style="margin-top:8px;opacity:0.5;font-size:0.78rem;">Built with Flask · Scikit-learn · Python</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        document.querySelectorAll('.stat-num').forEach(el => {
+            const target = +el.dataset.target;
+            let count = 0;
+            const step = Math.ceil(target / 60);
+            const timer = setInterval(() => {
+                count = Math.min(count + step, target);
+                el.textContent = count;
+                if (count >= target) clearInterval(timer);
+            }, 20);
+        });
+    </script>
+</body>
+
+</html>

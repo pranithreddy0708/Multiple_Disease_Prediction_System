@@ -1,0 +1,489 @@
+/* ═══════════════════════════════════════════════
+   DiseasePred — Light Blue & White Theme
+   Fonts: Nunito (headings) + Roboto (body)
+═══════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Roboto:wght@300;400;500&display=swap');
+
+:root {
+  --bg:             #f0f6ff;
+  --bg2:            #ffffff;
+  --bg3:            #e8f1fc;
+  --border:         #d0e3f7;
+  --text:           #1a2a3a;
+  --text2:          #5a7a9a;
+  --accent:         #1a7fd4;
+  --accent-light:   #e3f0fb;
+  --accent2:        #0a5fa8;
+  --danger:         #e53935;
+  --danger-bg:      #fdecea;
+  --danger-border:  #f5c6c6;
+  --success:        #2e7d52;
+  --success-bg:     #e8f5ee;
+  --success-border: #b2dfcb;
+  --shadow-sm:  0 2px 8px rgba(26,127,212,0.08);
+  --shadow-md:  0 6px 24px rgba(26,127,212,0.13);
+  --shadow-lg:  0 12px 40px rgba(26,127,212,0.18);
+  --radius:     14px;
+  --radius-sm:  9px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 15px;
+}
+
+h1, h2, h3, h4, h5 { font-family: 'Nunito', sans-serif; font-weight: 800; }
+
+/* ── Navbar ─────────────────────────────────── */
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  background: #ffffff; border-bottom: 2px solid var(--border);
+  padding: 0 40px; height: 64px;
+  display: flex; align-items: center; gap: 36px;
+  box-shadow: var(--shadow-sm);
+}
+.logo {
+  font-family: 'Nunito', sans-serif; font-weight: 900;
+  font-size: 1.35rem; color: var(--accent);
+  text-decoration: none; display: flex; align-items: center;
+  gap: 9px; white-space: nowrap;
+}
+.logo-icon {
+  background: var(--accent); color: white; border-radius: 8px;
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+}
+.navbar nav { display: flex; gap: 4px; flex: 1; }
+.navbar nav a {
+  color: var(--text2); text-decoration: none;
+  font-family: 'Nunito', sans-serif; font-weight: 700;
+  font-size: 0.9rem; padding: 7px 16px; border-radius: 20px;
+  transition: all 0.2s;
+}
+.navbar nav a:hover, .navbar nav a.active {
+  color: var(--accent); background: var(--accent-light);
+}
+
+/* ── Hero ───────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, #1a7fd4 0%, #0a5fa8 45%, #1565c0 100%);
+  color: white; padding: 80px;
+  display: flex; align-items: center; justify-content: space-between;
+  min-height: 440px; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(255,255,255,0.05) 0%, transparent 40%);
+}
+.hero-content { position: relative; z-index: 1; max-width: 560px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 20px; padding: 5px 15px;
+  font-size: 0.82rem; font-weight: 500; margin-bottom: 20px;
+}
+.hero h1 {
+  font-size: 3rem; font-weight: 900; line-height: 1.1;
+  margin-bottom: 16px; letter-spacing: -0.5px;
+}
+.hero-highlight {
+  background: linear-gradient(90deg, #a8d8ff, #e0f0ff);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero p { font-size: 1.05rem; opacity: 0.88; line-height: 1.7; margin-bottom: 32px; }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.btn-white {
+  background: white; color: var(--accent);
+  padding: 12px 28px; border-radius: 10px;
+  text-decoration: none; font-family: 'Nunito', sans-serif;
+  font-weight: 800; font-size: 0.95rem; border: none; cursor: pointer;
+  transition: all 0.2s; box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+  display: inline-block;
+}
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+
+.btn-outline-white {
+  background: transparent; color: white;
+  padding: 12px 28px; border-radius: 10px;
+  text-decoration: none; font-family: 'Nunito', sans-serif;
+  font-weight: 700; font-size: 0.95rem;
+  border: 2px solid rgba(255,255,255,0.5); transition: all 0.2s;
+  display: inline-block;
+}
+.btn-outline-white:hover { background: rgba(255,255,255,0.12); }
+
+/* Hero pulse */
+.hero-visual {
+  position: relative; width: 260px; height: 260px;
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+}
+.pulse-ring {
+  position: absolute; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.22);
+  animation: pulseRing 3s ease-out infinite;
+}
+.pulse-ring:nth-child(1) { width: 90px; height: 90px; }
+.pulse-ring.d1 { width: 155px; height: 155px; animation-delay: 0.9s; }
+.pulse-ring.d2 { width: 230px; height: 230px; animation-delay: 1.8s; }
+.hero-icon-center {
+  font-size: 3.5rem; position: relative; z-index: 1;
+  animation: heartbeat 1.6s ease-in-out infinite;
+}
+@keyframes pulseRing {
+  0%   { opacity: 0.6; transform: scale(0.85); }
+  100% { opacity: 0;   transform: scale(1.15); }
+}
+@keyframes heartbeat {
+  0%,100% { transform: scale(1); }
+  15%     { transform: scale(1.14); }
+  30%     { transform: scale(1); }
+  45%     { transform: scale(1.07); }
+}
+
+/* ── Stats Bar ──────────────────────────────── */
+.stats-bar {
+  background: white; border-bottom: 2px solid var(--border);
+  display: flex; justify-content: center; align-items: center;
+  padding: 24px 40px; box-shadow: var(--shadow-sm);
+}
+.stat { text-align: center; padding: 0 48px; }
+.stat-num { font-family: 'Nunito', sans-serif; font-size: 2.2rem; font-weight: 900; color: var(--accent); }
+.stat span { font-size: 1.3rem; color: var(--accent); font-weight: 900; }
+.stat p    { color: var(--text2); font-size: 0.8rem; margin-top: 3px; font-weight: 500; }
+.stat-divider { width: 1px; height: 46px; background: var(--border); }
+
+/* ── Sections ───────────────────────────────── */
+.section-label {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+  font-family: 'Nunito', sans-serif;
+}
+.section-title { font-size: 1.9rem; font-weight: 900; margin-bottom: 46px; color: var(--text); }
+
+/* ── Cards ──────────────────────────────────── */
+.cards-section { max-width: 1100px; margin: 0 auto; padding: 72px 24px; text-align: center; }
+.cards { display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; }
+
+.card {
+  background: white; border: 2px solid var(--border);
+  border-radius: var(--radius); padding: 32px 26px; width: 316px;
+  text-align: left; text-decoration: none; color: var(--text);
+  position: relative; overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  box-shadow: var(--shadow-sm);
+}
+.card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.card-diabetes:hover   { border-color: #ef9a9a; }
+.card-heart:hover      { border-color: #f48fb1; }
+.card-parkinsons:hover { border-color: #9fa8da; }
+
+.card-stripe { position: absolute; top: 0; left: 0; right: 0; height: 5px; }
+.card-diabetes   .card-stripe { background: linear-gradient(90deg,#ef5350,#ff8a80); }
+.card-heart      .card-stripe { background: linear-gradient(90deg,#e91e63,#f48fb1); }
+.card-parkinsons .card-stripe { background: linear-gradient(90deg,#5c6bc0,#9fa8da); }
+
+.card-icon { font-size: 2.4rem; margin: 12px 0 10px; }
+.card-tag  {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.09em;
+  text-transform: uppercase; color: var(--text2); margin-bottom: 8px;
+  font-family: 'Nunito', sans-serif;
+}
+.card h3 { font-size: 1.2rem; margin-bottom: 8px; }
+.card p  { font-size: 0.87rem; color: var(--text2); line-height: 1.65; margin-bottom: 18px; }
+
+.card-accuracy { display: flex; flex-direction: column; gap: 7px; }
+.acc-bar { height: 5px; border-radius: 3px; width: var(--w,0%); transition: width 1.2s ease; }
+.card-diabetes   .acc-bar { background: linear-gradient(90deg,#ef5350,#ff8a80); }
+.card-heart      .acc-bar { background: linear-gradient(90deg,#e91e63,#f48fb1); }
+.card-parkinsons .acc-bar { background: linear-gradient(90deg,#5c6bc0,#9fa8da); }
+.card-accuracy span { font-size: 0.78rem; color: var(--text2); font-weight: 500; }
+
+.card-arrow {
+  position: absolute; bottom: 18px; right: 22px;
+  font-size: 1.1rem; color: var(--border); transition: transform 0.2s, color 0.2s;
+}
+.card:hover .card-arrow { transform: translateX(5px); color: var(--accent); }
+
+/* ── How It Works ───────────────────────────── */
+.how-it-works { background: white; border-top: 2px solid var(--border); padding: 72px 40px; text-align: center; }
+.steps { display: flex; align-items: flex-start; justify-content: center; flex-wrap: wrap; max-width: 1000px; margin: 0 auto; }
+.step { text-align: center; max-width: 185px; padding: 16px; }
+.step-num { font-family: 'Nunito', sans-serif; font-size: 2rem; font-weight: 900; color: var(--accent); margin-bottom: 10px; opacity: 0.5; }
+.step h4 { font-size: 0.95rem; font-weight: 800; margin-bottom: 7px; }
+.step p  { font-size: 0.82rem; color: var(--text2); line-height: 1.5; }
+.step-arrow { font-size: 1.5rem; color: var(--border); margin-top: 30px; }
+
+/* ── Page Header ────────────────────────────── */
+.page-header { padding: 36px 40px; border-bottom: 2px solid var(--border); background: white; }
+.page-header-diabetes   { border-top: 4px solid #ef5350; }
+.page-header-heart      { border-top: 4px solid #e91e63; }
+.page-header-parkinsons { border-top: 4px solid #5c6bc0; }
+.page-header-history    { border-top: 4px solid var(--accent); }
+.page-header-checker    { border-top: 4px solid #2e7d52; }
+
+.page-header-content { display: flex; align-items: center; gap: 18px; max-width: 1000px; margin: 0 auto; }
+.page-icon { font-size: 2.4rem; }
+.page-header h1 { font-size: 1.75rem; }
+.page-header p  { color: var(--text2); font-size: 0.87rem; margin-top: 3px; font-weight: 500; }
+
+/* ── Form Container ─────────────────────────── */
+.form-container { max-width: 1000px; margin: 36px auto; padding: 0 24px 60px; }
+.form-container h2 { font-size: 1.3rem; margin-bottom: 4px; }
+.subtitle { color: var(--text2); font-size: 0.87rem; margin-bottom: 26px; }
+
+/* ── BMI Tool ───────────────────────────────── */
+.tool-card { background: var(--accent-light); border: 2px solid var(--border); border-radius: var(--radius); margin-bottom: 26px; overflow: hidden; }
+.tool-header {
+  padding: 13px 20px; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.9rem;
+  color: var(--accent); user-select: none; transition: background 0.2s;
+}
+.tool-header:hover { background: #d0e8f8; }
+.tool-header small { font-weight: 500; color: var(--text2); margin-left: 8px; font-family: 'Roboto', sans-serif; }
+.toggle-icon { font-size: 0.75rem; }
+.tool-body { padding: 16px 20px 20px; background: white; display: none; }
+.bmi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+
+/* ── Form ───────────────────────────────────── */
+.form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 18px; margin-bottom: 26px; }
+.form-group label {
+  display: flex; align-items: center; gap: 6px;
+  font-family: 'Nunito', sans-serif; font-size: 0.82rem; font-weight: 700;
+  color: var(--text); margin-bottom: 7px;
+}
+.hint { font-family: 'Roboto', sans-serif; font-weight: 400; color: var(--text2); font-size: 0.73rem; }
+.form-group input, .form-group select {
+  width: 100%; padding: 10px 14px;
+  background: white; border: 2px solid var(--border); border-radius: var(--radius-sm);
+  color: var(--text); font-family: 'Roboto', sans-serif; font-size: 0.92rem;
+  outline: none; transition: border-color 0.2s, box-shadow 0.2s; appearance: none;
+}
+.form-group input:focus, .form-group select:focus {
+  border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,127,212,0.1);
+}
+.readonly-field { background: var(--bg3) !important; cursor: not-allowed; }
+
+.feature-section-title {
+  font-family: 'Nunito', sans-serif; font-size: 0.78rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
+  margin: 26px 0 12px; padding-bottom: 8px; border-bottom: 2px solid var(--border);
+}
+.info-banner {
+  background: var(--accent-light); border: 2px solid var(--border);
+  border-left: 4px solid var(--accent); border-radius: var(--radius-sm);
+  padding: 12px 16px; font-size: 0.86rem; color: var(--text2); margin-bottom: 22px;
+}
+
+/* ── Buttons ────────────────────────────────── */
+.btn-predict {
+  width: 100%; padding: 15px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: white; border: none; border-radius: var(--radius-sm);
+  font-family: 'Nunito', sans-serif; font-size: 1.05rem; font-weight: 800;
+  cursor: pointer; letter-spacing: 0.02em; transition: all 0.2s;
+  box-shadow: 0 4px 16px rgba(26,127,212,0.3);
+}
+.btn-predict:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,127,212,0.4); }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: white; padding: 11px 24px; border-radius: var(--radius-sm);
+  text-decoration: none; font-family: 'Nunito', sans-serif;
+  font-weight: 800; font-size: 0.93rem; border: none; cursor: pointer;
+  transition: all 0.2s; box-shadow: 0 3px 12px rgba(26,127,212,0.25); display: inline-block;
+}
+.btn-primary:hover { transform: translateY(-2px); }
+
+.btn-secondary {
+  padding: 10px 20px; background: white; color: var(--accent);
+  border: 2px solid var(--border); border-radius: var(--radius-sm);
+  font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 700;
+  cursor: pointer; transition: all 0.2s;
+}
+.btn-secondary:hover { background: var(--accent-light); border-color: var(--accent); }
+
+/* ── Risk Meter ─────────────────────────────── */
+.risk-meter-container {
+  margin-top: 22px; background: white;
+  border: 2px solid var(--border); border-radius: var(--radius);
+  padding: 20px 24px; animation: fadeInUp 0.4s ease; box-shadow: var(--shadow-sm);
+}
+.risk-meter-container h4 { font-size: 0.88rem; margin-bottom: 12px; color: var(--text2); }
+.risk-meter { height: 22px; background: var(--bg3); border-radius: 11px; overflow: hidden; border: 1px solid var(--border); }
+.risk-fill {
+  height: 100%; border-radius: 11px;
+  transition: width 1.1s cubic-bezier(0.4,0,0.2,1);
+  display: flex; align-items: center; justify-content: flex-end; padding-right: 10px;
+}
+.risk-fill.low    { background: linear-gradient(90deg,#66bb6a,#a5d6a7); }
+.risk-fill.medium { background: linear-gradient(90deg,#ffa726,#ffcc80); }
+.risk-fill.high   { background: linear-gradient(90deg,#ef5350,#ff8a80); }
+.risk-label { font-size: 0.7rem; font-weight: 700; color: white; white-space: nowrap; }
+.risk-scale { display: flex; justify-content: space-between; margin-top: 7px; font-size: 0.72rem; color: var(--text2); }
+
+/* ── Result Box ─────────────────────────────── */
+.result-box { margin-top: 20px; padding: 22px 26px; border-radius: var(--radius); animation: fadeInUp 0.4s ease; }
+.result-box.positive { background: var(--danger-bg); border: 2px solid var(--danger-border); border-left: 5px solid var(--danger); }
+.result-box.negative { background: var(--success-bg); border: 2px solid var(--success-border); border-left: 5px solid var(--success); }
+.result-box h3 { font-size: 1.18rem; margin-bottom: 6px; }
+.result-box p  { font-size: 0.87rem; color: var(--text2); line-height: 1.6; }
+
+/* ── Health Tips ────────────────────────────── */
+.health-tips {
+  margin-top: 20px; background: white;
+  border: 2px solid var(--border); border-radius: var(--radius);
+  padding: 20px 24px; animation: fadeInUp 0.5s ease; box-shadow: var(--shadow-sm);
+}
+.health-tips h4 { font-size: 1rem; margin-bottom: 14px; }
+.health-tips ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.health-tips li {
+  font-size: 0.87rem; color: var(--text2); padding: 8px 12px 8px 32px;
+  position: relative; line-height: 1.6; background: var(--bg); border-radius: 7px;
+}
+.health-tips li::before { content: "✓"; position: absolute; left: 10px; color: var(--accent); font-weight: 700; }
+
+/* ── Print Button ───────────────────────────── */
+.report-actions { display: flex; gap: 12px; margin-top: 20px; animation: fadeInUp 0.6s ease; }
+
+/* ══════════════════════════════════════════════
+   SYMPTOM CHECKER
+══════════════════════════════════════════════ */
+.checker-page-wrap { max-width: 1000px; margin: 36px auto; padding: 0 24px 60px; }
+
+.checker-intro {
+  background: white; border: 2px solid var(--border);
+  border-radius: var(--radius); padding: 24px 28px;
+  margin-bottom: 28px; box-shadow: var(--shadow-sm);
+}
+.checker-intro p { color: var(--text2); font-size: 0.9rem; line-height: 1.7; margin-top: 6px; }
+
+.checker-tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+.checker-tab {
+  padding: 9px 20px; border-radius: 22px;
+  background: white; border: 2px solid var(--border);
+  font-family: 'Nunito', sans-serif; font-weight: 700;
+  font-size: 0.88rem; color: var(--text2); cursor: pointer; transition: all 0.2s;
+}
+.checker-tab:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+.checker-tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+.checker-panel { display: none; }
+.checker-panel.active { display: block; animation: fadeInUp 0.3s ease; }
+
+.checker-card {
+  background: white; border: 2px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm);
+}
+.checker-card-header {
+  padding: 18px 24px; display: flex; align-items: center; gap: 14px;
+  border-bottom: 2px solid var(--border);
+}
+.checker-card-header .ch-icon { font-size: 1.9rem; }
+.checker-card-header h3 { font-size: 1.1rem; }
+.checker-card-header p  { font-size: 0.82rem; color: var(--text2); margin-top: 2px; font-weight: 400; }
+.ch-diabetes-header   { background: linear-gradient(135deg,#fff5f5,#ffe5e5); }
+.ch-heart-header      { background: linear-gradient(135deg,#fff0f5,#ffe4ee); }
+.ch-parkinsons-header { background: linear-gradient(135deg,#f3f4ff,#ebe8ff); }
+
+.checker-card-body { padding: 22px 24px; }
+
+.symptom-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(210px,1fr)); gap: 10px; margin-bottom: 20px; }
+.symptom-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 13px; border: 2px solid var(--border);
+  border-radius: var(--radius-sm); cursor: pointer;
+  transition: all 0.18s; user-select: none; background: var(--bg);
+}
+.symptom-item:hover { border-color: var(--accent); background: var(--accent-light); }
+.symptom-item.checked { border-color: #43a047; background: #e8f5e9; }
+.sym-check {
+  width: 20px; height: 20px; border-radius: 5px;
+  border: 2px solid var(--border); background: white;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 0.72rem; color: transparent; transition: all 0.18s;
+}
+.symptom-item.checked .sym-check { background: #43a047; border-color: #43a047; color: white; }
+.sym-label { font-size: 0.84rem; font-weight: 500; color: var(--text); line-height: 1.3; }
+
+.checker-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.checker-count {
+  font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.85rem; color: var(--text2);
+  background: var(--bg); border: 2px solid var(--border); border-radius: 20px; padding: 6px 14px;
+}
+.checker-result {
+  padding: 16px 20px; border-radius: var(--radius-sm); font-size: 0.88rem;
+  margin-top: 18px; display: none; animation: fadeInUp 0.3s ease;
+}
+.checker-result.none   { background: var(--success-bg); border: 2px solid var(--success-border); }
+.checker-result.low    { background: #fff8e1; border: 2px solid #ffe082; }
+.checker-result.medium { background: #fff3e0; border: 2px solid #ffb74d; }
+.checker-result.high   { background: var(--danger-bg); border: 2px solid var(--danger-border); }
+.checker-result h4 { font-size: 0.95rem; margin-bottom: 5px; }
+.checker-result p  { font-size: 0.84rem; color: var(--text2); line-height: 1.6; }
+.checker-result .go-predict {
+  display: inline-block; margin-top: 12px; padding: 8px 18px;
+  background: var(--accent); color: white; border-radius: var(--radius-sm);
+  text-decoration: none; font-family: 'Nunito', sans-serif;
+  font-weight: 700; font-size: 0.85rem; transition: all 0.2s;
+}
+.checker-result .go-predict:hover { background: var(--accent2); transform: translateY(-1px); }
+
+/* ── History ────────────────────────────────── */
+.history-item {
+  background: white; border: 2px solid var(--border); border-radius: var(--radius);
+  padding: 18px 22px; margin-bottom: 12px;
+  display: flex; justify-content: space-between; align-items: center;
+  transition: transform 0.2s, box-shadow 0.2s; box-shadow: var(--shadow-sm);
+}
+.history-item:hover { transform: translateX(4px); box-shadow: var(--shadow-md); }
+.hist-positive { border-left: 5px solid var(--danger); }
+.hist-negative { border-left: 5px solid var(--success); }
+.hist-left { display: flex; align-items: center; gap: 16px; }
+.hist-icon { font-size: 1.8rem; }
+.hist-title { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.95rem; }
+.hist-meta  { font-size: 0.78rem; color: var(--text2); margin-top: 3px; }
+.hist-right { text-align: right; }
+.hist-conf  { font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: 900; color: var(--accent); }
+.hist-conf-label { font-size: 0.72rem; color: var(--text2); }
+.empty-state { text-align: center; padding: 60px 20px; color: var(--text2); }
+.empty-state p { margin-top: 10px; font-size: 0.9rem; }
+
+/* ── Footer ─────────────────────────────────── */
+.footer {
+  background: white; border-top: 2px solid var(--border);
+  padding: 28px 40px; text-align: center;
+  font-size: 0.84rem; color: var(--text2);
+}
+
+/* ── Animations ─────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ─────────────────────────────── */
+@media (max-width: 768px) {
+  .hero { flex-direction: column; padding: 48px 22px; gap: 30px; }
+  .hero h1 { font-size: 2.1rem; }
+  .hero-visual { display: none; }
+  .stats-bar { flex-wrap: wrap; gap: 20px; padding: 22px; }
+  .stat-divider { display: none; }
+  .navbar { padding: 0 16px; gap: 12px; }
+  .navbar nav a { padding: 5px 10px; font-size: 0.82rem; }
+  .bmi-grid { grid-template-columns: 1fr; }
+  .steps { flex-direction: column; align-items: center; }
+  .step-arrow { transform: rotate(90deg); }
+  .report-actions, .checker-actions { flex-direction: column; }
+  .symptom-grid { grid-template-columns: 1fr 1fr; }
+}

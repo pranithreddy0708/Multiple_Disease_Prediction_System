@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lung Cancer Prediction — DiseasePred</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="/" class="logo"><span class="logo-icon">⬡</span> DiseasePred</a>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/symptom-checker">Symptom Checker</a>
+            <a href="/diabetes">Diabetes</a>
+            <a href="/heart">Heart</a>
+            <a href="/parkinsons">Parkinson's</a>
+            <a href="/lung" class="active">Lung Cancer</a>
+            <a href="/kidney">Kidney</a>
+            <a href="/history">History</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <div class="page-header page-header-lung">
+        <div class="page-header-content">
+            <div class="page-icon">🫁</div>
+            <div>
+                <h1>Lung Cancer Prediction</h1>
+                <p>Machine Learning Model · Respiratory Symptoms</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-container">
+
+        <h2>Enter Lung Health Parameters</h2>
+        <p class="subtitle">Provide respiratory symptoms for lung cancer prediction.</p>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <div class="input-group">
+                    <label>Patient Name</label>
+                    <input type="text" id="patient_name" placeholder="Enter patient name">
+                </div>
+                <label>Gender</label>
+                <select id="GENDER">
+<option value="1">Male</option>
+<option value="0">Female</option>
+</select>
+            </div>
+
+            <div class="form-group">
+                <label>Age</label>
+                <input type="number" id="AGE" value="45">
+            </div>
+
+            <div class="form-group">
+                <label>Smoking</label>
+                <select id="SMOKING">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+            </div>
+
+            <div class="form-group">
+                <label>Yellow Fingers</label>
+                <select id="YELLOW_FINGERS">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+            </div>
+
+            <div class="form-group">
+                <label>Anxiety</label>
+                <select id="ANXIETY">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+            </div>
+
+            <div class="form-group">
+                <label>Peer Pressure</label>
+                <select id="PEER_PRESSURE">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+            </div>
+
+            <div class="form-group">
+                <label>Chronic Disease</label>
+                <select id="CHRONIC_DISEASE">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+            </div>
+
+            <div class="form-group">
+                <label>Fatigue</label>
+                <select id="FATIGUE">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+            </div>
+
+            <div class="form-group">
+                <label>Allergy</label>
+                <select id="ALLERGY">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+            </div>
+
+            <div class="form-group">
+                <label>Wheezing</label>
+                <select id="WHEEZING">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+            </div>
+
+            <div class="form-group">
+                <label>Alcohol Consuming</label>
+                <select id="ALCOHOL_CONSUMING">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+            </div>
+
+            <div class="form-group">
+                <label>Coughing</label>
+                <select id="COUGHING">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+            </div>
+
+            <div class="form-group">
+                <label>Shortness of Breath</label>
+                <select id="SHORTNESS_OF_BREATH">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+            </div>
+
+            <div class="form-group">
+                <label>Swallowing Difficulty</label>
+                <select id="SWALLOWING_DIFFICULTY">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+            </div>
+
+            <div class="form-group">
+                <label>Chest Pain</label>
+                <select id="CHEST_PAIN">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+            </div>
+
+        </div>
+
+        <button class="btn-predict" onclick="predict('lung')">
+            <span class="btn-text">🔍 Predict Lung Cancer</span>
+            <span class="btn-loader" style="display:none">Analyzing ⏳</span>
+        </button>
+
+        <div class="risk-meter-container" id="risk-meter" style="display:none">
+            <h4>Risk Confidence Meter</h4>
+
+            <div class="risk-meter">
+                <div class="risk-fill" id="risk-fill">
+                    <span class="risk-label" id="risk-label"></span>
+                </div>
+            </div>
+
+            <div class="risk-scale">
+                <span>Low Risk</span>
+                <span>Moderate</span>
+                <span>High Risk</span>
+            </div>
+        </div>
+
+        <div class="result-box" id="result" style="display:none"></div>
+
+        <div class="health-tips" id="health-tips" style="display:none">
+            <h4>💡 Personalized Health Tips</h4>
+            <ul id="tips-list"></ul>
+        </div>
+
+        <div class="report-actions" id="report-actions" style="display:none">
+            <button class="btn-secondary" onclick="printReport('lung')">
+        🖨️ Print Report
+    </button>
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+
+</html>

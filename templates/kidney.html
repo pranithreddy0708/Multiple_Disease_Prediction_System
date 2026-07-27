@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kidney Prediction — DiseasePred</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="/" class="logo"><span class="logo-icon">⬡</span> DiseasePred</a>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/symptom-checker">Symptom Checker</a>
+            <a href="/diabetes">Diabetes</a>
+            <a href="/heart">Heart</a>
+            <a href="/parkinsons">Parkinson's</a>
+            <a href="/lung">Lung Cancer</a>
+            <a href="/kidney" class="active">Kidney</a>
+            <a href="/history">History</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <div class="page-header page-header-kidney">
+        <div class="page-header-content">
+            <div class="page-icon">🫘</div>
+            <div>
+                <h1>Kidney Disease Prediction</h1>
+                <p>Machine Learning Model · Clinical Biomarkers</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-container">
+
+        <div class="info-banner">
+            ℹ️ Enter the patient's clinical test values used to detect Chronic Kidney Disease.
+        </div>
+
+        <h2>Enter Kidney Health Parameters</h2>
+        <p class="subtitle">Provide laboratory test values for accurate prediction.</p>
+
+        <div class="feature-section-title">🧑 Patient Information</div>
+
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Patient Name</label>
+                <input type="text" id="patient_name" placeholder="Enter patient name">
+            </div>
+
+            <div class="form-group">
+                <label>Age</label>
+                <input type="number" id="age" value="45" />
+            </div>
+
+
+            <div class="form-group">
+                <label>Blood Pressure</label>
+                <input type="number" id="bp" value="80" />
+            </div>
+
+            <div class="form-group">
+                <label>Specific Gravity</label>
+                <input type="number" id="sg" value="1.020" step="0.001" />
+            </div>
+
+            <div class="form-group">
+                <label>Albumin</label>
+                <input type="number" id="al" value="1" />
+            </div>
+
+            <div class="form-group">
+                <label>Sugar</label>
+                <input type="number" id="su" value="0" />
+            </div>
+
+
+        </div>
+
+        <div class="feature-section-title">🧪 Blood Test Results</div>
+
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Blood Glucose Random</label>
+                <input type="number" id="bgr" value="120" />
+            </div>
+
+
+            <div class="form-group">
+                <label>Blood Urea</label>
+                <input type="number" id="bu" value="36" />
+            </div>
+
+            <div class="form-group">
+                <label>Serum Creatinine</label>
+                <input type="number" id="sc" value="1.2" step="0.01" />
+            </div>
+
+            <div class="form-group">
+                <label>Sodium</label>
+                <input type="number" id="sod" value="135" />
+            </div>
+
+            <div class="form-group">
+                <label>Potassium</label>
+                <input type="number" id="pot" value="4.5" step="0.1" />
+            </div>
+            <div class="form-group">
+                <label>Hemoglobin</label>
+                <input type="number" id="hemo" value="15">
+            </div>
+
+            <div class="form-group">
+                <label>Packed Cell Volume</label>
+                <input type="number" id="pcv" value="44">
+            </div>
+
+
+        </div>
+
+        <button class="btn-predict" onclick="predict('kidney')">
+    <span class="btn-text">🔍 Predict Kidney Disease</span>
+    <span class="btn-loader" style="display:none">Analyzing ⏳</span>
+  </button>
+
+        <div class="risk-meter-container" id="risk-meter" style="display:none">
+            <h4>Risk Confidence Meter</h4>
+            <div class="risk-meter">
+                <div class="risk-fill" id="risk-fill">
+                    <span class="risk-label" id="risk-label"></span>
+                </div>
+            </div>
+            <div class="risk-scale">
+                <span>Low Risk</span>
+                <span>Moderate</span>
+                <span>High Risk</span>
+            </div>
+        </div>
+
+        <div class="result-box" id="result" style="display:none"></div>
+
+        <div class="health-tips" id="health-tips" style="display:none">
+            <h4>💡 Kidney Health Tips</h4>
+            <ul id="tips-list"></ul>
+        </div>
+
+        <div class="report-actions" id="report-actions" style="display:none">
+            <button class="btn-secondary" onclick="printReport('kidney')">
+      🖨️ Print Report
+    </button>
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+
+</html>

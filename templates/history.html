@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction History — DiseasePred</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <a href="/" class="logo">
+            <span class="logo-icon">⬡</span> DiseasePred
+        </a>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/symptom-checker">Symptom Checker</a>
+            <a href="/diabetes">Diabetes</a>
+            <a href="/heart">Heart</a>
+            <a href="/parkinsons">Parkinson's</a>
+            <a href="/lung">Lung Cancer</a>
+            <a href="/kidney">Kidney Disease</a>
+            <a href="/history" class="active">History</a>
+            <a href="/logout">Logout</a>
+        </nav>
+
+    </header>
+
+
+    <div class="page-header page-header-history">
+
+        <div class="page-header-content">
+
+            <div class="page-icon">📋</div>
+
+            <div>
+                <h1>Prediction History</h1>
+                <p>All predictions made during this session</p>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="form-container">
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+
+            <h2>Session History</h2>
+
+            <button class="btn-secondary" onclick="clearHistory()">
+🗑️ Clear History
+</button>
+
+        </div>
+
+
+        <div class="empty-state" id="empty-state" style="display:none">
+
+            <div style="font-size:3rem">📭</div>
+
+            <p>No predictions yet. Go to a disease page and run a prediction!</p>
+
+            <a href="/" class="btn-primary" style="margin-top:16px;">
+Start Predicting →
+</a>
+
+        </div>
+
+
+        <div id="history-list"></div>
+
+    </div>
+
+
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+
+    <script>
+        function renderHistory() {
+
+            let history = JSON.parse(localStorage.getItem("prediction_history")) || [];
+
+            const list = document.getElementById("history-list");
+            const empty = document.getElementById("empty-state");
+
+            if (history.length === 0) {
+
+                empty.style.display = "block";
+                list.innerHTML = "";
+                return;
+
+            }
+
+            empty.style.display = "none";
+
+            list.innerHTML = history.slice().reverse().map(item => {
+
+                let icon = "🧪";
+
+                if (item.disease === "diabetes") icon = "🩸";
+                if (item.disease === "heart") icon = "❤️";
+                if (item.disease === "parkinsons") icon = "🧠";
+                if (item.disease === "lung") icon = "🫁";
+                if (item.disease === "kidney") icon = "🧪";
+
+                let patient = item.patient || "Unknown";
+
+                return `
+
+<div class="history-item ${item.prediction===1?'hist-positive':'hist-negative'}">
+
+<div class="hist-left">
+
+<div class="hist-icon">
+${icon}
+</div>
+
+<div>
+
+<div class="hist-title">${item.label}</div>
+
+
+
+<div class="hist-meta">
+${item.disease.charAt(0).toUpperCase()+item.disease.slice(1)}
+· ${item.time}
+</div>
+
+</div>
+
+</div>
+
+<div class="hist-right">
+
+<div class="hist-conf">${item.confidence}%</div>
+<div class="hist-conf-label">Confidence</div>
+
+</div>
+
+</div>
+
+`;
+
+            }).join("");
+
+        }
+
+
+        function clearHistory() {
+
+            if (confirm("Clear all prediction history?")) {
+
+                localStorage.removeItem("prediction_history");
+                renderHistory();
+
+            }
+
+        }
+
+
+        renderHistory();
+    </script>
+
+</body>
+
+</html>

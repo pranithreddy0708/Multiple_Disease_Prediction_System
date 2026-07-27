@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom Checker — DiseasePred</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <a href="/" class="logo">
+            <span class="logo-icon">⬡</span> DiseasePred
+        </a>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/symptom-checker" class="active">Symptom Checker</a>
+            <a href="/diabetes">Diabetes</a>
+            <a href="/heart">Heart</a>
+            <a href="/parkinsons">Parkinson's</a>
+            <a href="/lung">Lung Cancer</a>
+            <a href="/kidney">Kidney Disease</a>
+            <a href="/history">History</a>
+            <a href="/logout">Logout</a>
+        </nav>
+
+    </header>
+
+
+    <div class="page-header page-header-checker">
+
+        <div class="page-header-content">
+
+            <div class="page-icon">🔔</div>
+
+            <div>
+                <h1>Symptom Checker</h1>
+                <p>Select your symptoms to assess risk before running the full ML prediction</p>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="checker-page-wrap">
+
+
+        <div class="checker-intro">
+
+            <h2>How to use the Symptom Checker</h2>
+
+            <p>
+                Select all the symptoms you are currently experiencing. The checker will estimate your risk level and guide you to the most relevant prediction module.
+                <strong>This is not a diagnosis</strong> — always consult a healthcare professional.
+            </p>
+
+        </div>
+
+
+        <!-- TABS -->
+
+        <div class="checker-tabs">
+
+            <button class="checker-tab active" data-tab="diabetes" onclick="switchTab('diabetes')">
+🩸 Diabetes
+</button>
+
+            <button class="checker-tab" data-tab="heart" onclick="switchTab('heart')">
+❤️ Heart Disease
+</button>
+
+            <button class="checker-tab" data-tab="parkinsons" onclick="switchTab('parkinsons')">
+🧠 Parkinson's
+</button>
+
+            <button class="checker-tab" data-tab="lung" onclick="switchTab('lung')">
+🫁 Lung Cancer
+</button>
+
+            <button class="checker-tab" data-tab="kidney" onclick="switchTab('kidney')">
+🫘 Kidney Disease
+</button>
+
+        </div>
+
+
+        <!-- DIABETES PANEL -->
+
+        <div class="checker-panel active" id="panel-diabetes">
+
+            <div class="checker-card">
+
+                <div class="checker-card-header ch-diabetes-header">
+
+                    <div class="ch-icon">🩸</div>
+
+                    <div>
+                        <h3>Diabetes Symptoms</h3>
+                        <p>Select all symptoms you are currently experiencing</p>
+                    </div>
+
+                </div>
+
+                <div class="checker-card-body">
+
+                    <div class="symptom-grid">
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Frequent urination</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Excessive thirst</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Unexplained weight loss</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Extreme hunger</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Blurred vision</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Fatigue</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Slow healing wounds</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Frequent infections</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Tingling in hands or feet</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Dark skin patches</span>
+                        </div>
+
+                    </div>
+
+                    <div class="checker-actions">
+
+                        <button class="btn-primary" onclick="runChecker('diabetes')">
+🔍 Assess Risk
+</button>
+
+                        <button class="btn-secondary" onclick="clearChecker('diabetes')">
+✕ Clear All
+</button>
+
+                        <span class="checker-count">0 symptoms selected</span>
+
+                    </div>
+
+                    <div class="checker-result"></div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- HEART PANEL -->
+
+        <div class="checker-panel" id="panel-heart">
+
+            <div class="checker-card">
+
+                <div class="checker-card-header ch-heart-header">
+
+                    <div class="ch-icon">❤️</div>
+
+                    <div>
+                        <h3>Heart Disease Symptoms</h3>
+                        <p>Select all symptoms you are currently experiencing</p>
+                    </div>
+
+                </div>
+
+                <div class="checker-card-body">
+
+                    <div class="symptom-grid">
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Chest pain or pressure</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Shortness of breath</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Pain in arm or shoulder</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Pain in neck or jaw</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Irregular heartbeat</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Fatigue</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Dizziness</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Cold sweats</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Swelling in legs</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Nausea</span>
+                        </div>
+
+                    </div>
+
+                    <div class="checker-actions">
+
+                        <button class="btn-primary" onclick="runChecker('heart')">
+🔍 Assess Risk
+</button>
+
+                        <button class="btn-secondary" onclick="clearChecker('heart')">
+✕ Clear All
+</button>
+
+                        <span class="checker-count">0 symptoms selected</span>
+
+                    </div>
+
+                    <div class="checker-result"></div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- PARKINSON PANEL -->
+
+        <div class="checker-panel" id="panel-parkinsons">
+
+            <div class="checker-card">
+
+                <div class="checker-card-header ch-parkinsons-header">
+
+                    <div class="ch-icon">🧠</div>
+
+                    <div>
+                        <h3>Parkinson's Disease Symptoms</h3>
+                        <p>Select all symptoms you are currently experiencing</p>
+                    </div>
+
+                </div>
+
+                <div class="checker-card-body">
+
+                    <div class="symptom-grid">
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Tremor (shaking at rest)</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Slow movement</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Muscle stiffness</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Balance problems</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Changes in speech</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Reduced facial expression</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Small handwriting</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Difficulty swallowing</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Loss of smell</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Sleep disturbances</span>
+                        </div>
+
+                    </div>
+
+                    <div class="checker-actions">
+
+                        <button class="btn-primary" onclick="runChecker('parkinsons')">
+🔍 Assess Risk
+</button>
+
+                        <button class="btn-secondary" onclick="clearChecker('parkinsons')">
+✕ Clear All
+</button>
+
+                        <span class="checker-count">0 symptoms selected</span>
+
+                    </div>
+
+                    <div class="checker-result"></div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- LUNG PANEL -->
+
+        <div class="checker-panel" id="panel-lung">
+
+            <div class="checker-card">
+
+                <div class="checker-card-header ch-lung-header">
+
+                    <div class="ch-icon">🫁</div>
+
+                    <div>
+                        <h3>Lung Cancer Symptoms</h3>
+                        <p>Select all symptoms you are currently experiencing</p>
+                    </div>
+
+                </div>
+
+                <div class="checker-card-body">
+
+                    <div class="symptom-grid">
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Persistent cough</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Coughing blood</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Chest pain</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Shortness of breath</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Wheezing</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Hoarseness</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Loss of appetite</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Weight loss</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Frequent chest infections</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Fatigue</span>
+                        </div>
+
+                    </div>
+
+                    <div class="checker-actions">
+
+                        <button class="btn-primary" onclick="runChecker('lung')">
+🔍 Assess Risk
+</button>
+
+                        <button class="btn-secondary" onclick="clearChecker('lung')">
+✕ Clear All
+</button>
+
+                        <span class="checker-count">0 symptoms selected</span>
+
+                    </div>
+
+                    <div class="checker-result"></div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- KIDNEY PANEL -->
+
+        <div class="checker-panel" id="panel-kidney">
+
+            <div class="checker-card">
+
+                <div class="checker-card-header ch-kidney-header">
+
+                    <div class="ch-icon">🫘</div>
+
+                    <div>
+                        <h3>Kidney Disease Symptoms</h3>
+                        <p>Select all symptoms you are currently experiencing</p>
+                    </div>
+
+                </div>
+
+                <div class="checker-card-body">
+
+                    <div class="symptom-grid">
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Swelling in legs or ankles</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Fatigue</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Difficulty concentrating</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Decreased urine output</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Foamy urine</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Blood in urine</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Muscle cramps</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Persistent itching</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">High blood pressure</span>
+                        </div>
+
+                        <div class="symptom-item" onclick="toggleSymptom(this)">
+                            <div class="sym-check"></div><span class="sym-label">Shortness of breath</span>
+                        </div>
+
+                    </div>
+
+                    <div class="checker-actions">
+
+                        <button class="btn-primary" onclick="runChecker('kidney')">
+🔍 Assess Risk
+</button>
+
+                        <button class="btn-secondary" onclick="clearChecker('kidney')">
+✕ Clear All
+</button>
+
+                        <span class="checker-count">0 symptoms selected</span>
+
+                    </div>
+
+                    <div class="checker-result"></div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <footer class="footer">
+
+        <p>
+            ⚠️ Symptom checking is for awareness only — not a medical diagnosis. Always consult a qualified doctor.
+        </p>
+
+    </footer>
+
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+
+</html>

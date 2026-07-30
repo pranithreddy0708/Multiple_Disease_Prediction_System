@@ -153,10 +153,10 @@ h1, h2, h3, h4, h5 { font-family: 'Nunito', sans-serif; font-weight: 800; }
 /* ── Stats Bar ──────────────────────────────── */
 .stats-bar {
   background: white; border-bottom: 2px solid var(--border);
-  display: flex; justify-content: center; align-items: center;
-  padding: 24px 40px; box-shadow: var(--shadow-sm);
+  display: flex; justify-content: center; align-items: center; flex-wrap: wrap;
+  padding: 24px 20px; gap: 16px 0; box-shadow: var(--shadow-sm);
 }
-.stat { text-align: center; padding: 0 48px; }
+.stat { text-align: center; padding: 0 24px; }
 .stat-num { font-family: 'Nunito', sans-serif; font-size: 2.2rem; font-weight: 900; color: var(--accent); }
 .stat span { font-size: 1.3rem; color: var(--accent); font-weight: 900; }
 .stat p    { color: var(--text2); font-size: 0.8rem; margin-top: 3px; font-weight: 500; }

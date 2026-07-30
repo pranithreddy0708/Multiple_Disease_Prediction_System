@@ -7,7 +7,7 @@ An AI-powered web application built with **Flask**, **Scikit-Learn**, and **SQLi
 ## 🌐 Live Server
 
 The application is currently running locally on:
-* **Local Web Server**: [http://127.0.0.1:5000/](http://127.0.0.1:5000/) or [http://localhost:5000/](http://localhost:5000/)
+* **Local Web Server**: [http://127.0.0.1:5100/](http://127.0.0.1:5100/) or [http://localhost:5100/](http://localhost:5100/)
 
 ---
 
@@ -57,7 +57,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Open your browser and navigate to `http://127.0.0.1:5000/`.
+Open your browser and navigate to `http://127.0.0.1:5100/`.
 
 ---
 

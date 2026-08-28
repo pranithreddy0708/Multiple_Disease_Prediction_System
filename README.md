@@ -4,10 +4,11 @@ An AI-powered web application built with **Flask**, **Scikit-Learn**, and **SQLi
 
 ---
 
-## 🌐 Live Server
+## 🌐 Live Application Links
 
-The application is currently running locally on:
-* **Local Web Server**: [http://127.0.0.1:5100/](http://127.0.0.1:5100/) or [http://localhost:5100/](http://localhost:5100/)
+* **Public URL (Any Device / Any Wi-Fi)**: [https://common-oranges-kick.loca.lt](https://common-oranges-kick.loca.lt)
+* **Local Network IP (Same Wi-Fi)**: [http://192.168.1.101:5100/](http://192.168.1.101:5100/)
+* **Local Host**: [http://127.0.0.1:5100/](http://127.0.0.1:5100/)
 
 ---
 

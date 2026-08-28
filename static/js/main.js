@@ -26,11 +26,12 @@ const TIPS = {
     }
 };
 
-function saveToHistory(disease, label, prediction, confidence) {
+function saveToHistory(disease, label, prediction, confidence, patientName = "") {
 
     let history = JSON.parse(localStorage.getItem("prediction_history")) || [];
 
     history.push({
+        patient_name: patientName && patientName.trim() ? patientName.trim() : "Unknown",
         disease: disease,
         label: label,
         prediction: prediction,
@@ -39,6 +40,7 @@ function saveToHistory(disease, label, prediction, confidence) {
     });
 
     localStorage.setItem("prediction_history", JSON.stringify(history));
+    console.log("History Saved:", history);
 }
 // ===============================
 // Helper function
@@ -119,10 +121,13 @@ async function predict(disease) {
 
     try {
 
+        const payload = getPayload();
+        const patientName = payload["patient_name"] || "";
+
         const res = await fetch(`/predict/${disease}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(getPayload())
+            body: JSON.stringify(payload)
         });
 
         const data = await res.json();
@@ -138,7 +143,7 @@ async function predict(disease) {
 
         let positive = data.prediction === 1;
 
-        saveToHistory(disease, data.label, data.prediction, data.confidence);
+        saveToHistory(disease, data.label, data.prediction, data.confidence, patientName);
 
         resultBox.className = `result-box ${positive?"positive":"negative"}`;
 
@@ -361,23 +366,5 @@ function switchTab(tab) {
     document.querySelector(`[data-tab="${tab}"]`).classList.add("active");
 
     document.getElementById("panel-" + tab).classList.add("active");
-
-}
-
-function saveToHistory(disease, label, prediction, confidence) {
-
-    let history = JSON.parse(localStorage.getItem("prediction_history")) || [];
-
-    history.push({
-        disease: disease,
-        label: label,
-        prediction: prediction,
-        confidence: confidence,
-        time: new Date().toLocaleString()
-    });
-
-    localStorage.setItem("prediction_history", JSON.stringify(history));
-
-    console.log("History Saved:", history);
 
 }

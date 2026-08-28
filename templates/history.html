@@ -111,7 +111,7 @@ Start Predicting →
                 if (item.disease === "lung") icon = "🫁";
                 if (item.disease === "kidney") icon = "🧪";
 
-                let patient = item.patient || "Unknown";
+                let patient = item.patient_name || item.patient || "Unknown";
 
                 return `
 
@@ -127,7 +127,7 @@ ${icon}
 
 <div class="hist-title">${item.label}</div>
 
-
+<div class="hist-patient">👤 Patient: ${patient}</div>
 
 <div class="hist-meta">
 ${item.disease.charAt(0).toUpperCase()+item.disease.slice(1)}
